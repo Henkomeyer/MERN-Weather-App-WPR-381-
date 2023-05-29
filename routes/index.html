@@ -8,6 +8,22 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Weather App</h1>
+  
+  <div id="location"></div>
+  <div id="temperature"></div>
+  <div id="weather-icon"></div>
+  
+  <div id="search-form">
+    <input type="text" id="search-input" placeholder="Enter location">
+    <button onclick="searchWeather()">Search</button>
+  </div>
+  
+  <div id="unit-toggle">
+    <input type="radio" id="celsius" name="unit" checked>
+    <label for="celsius">Celsius</label>
+    <input type="radio" id="fahrenheit" name="unit">
+    <label for="fahrenheit">Fahrenheit</label>
+  </div>
 </body>
 </html>
