@@ -14,7 +14,7 @@ function App() {
   }
 
   function GetData(){
-    fetch("/home")
+    fetch("/get")
     .then(res => res.json())
     .then(data => setData(data))
     .then(console.log(data))
@@ -31,7 +31,7 @@ function App() {
   useEffect(()=>{
     GetData();
     LoadPage();
-  })
+  },[location])
 
   return (
     <div className="App">

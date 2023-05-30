@@ -1,7 +1,9 @@
+import "./index.css"
+
 function Header(){
     return(
         <header>
-            Header
+            <h1>Weather App</h1>
         </header>
     )
 }
