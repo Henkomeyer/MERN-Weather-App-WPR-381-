@@ -136,4 +136,9 @@ function ChangeIcon({data, ChangeMetric, metric})
         );
     };  
 };
-export default Weather
+
+module.exports =
+{
+    ChangeIcon : ChangeIcon,
+    Weather : Weather,
+}
