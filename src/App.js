@@ -1,8 +1,16 @@
 import './App.css';
+<<<<<<< HEAD
+import './index.css';
+import { useEffect, useState } from 'react';
+import Header from './header.js'
+import Footer from './footer.js'
+import Content from './content.js'
+=======
 import React, { useEffect, useState } from 'react';
 import Header from './header.js';
 import Footer from './footer.js';
 import Content from './content.js';
+>>>>>>> eaaa214cdf2bd0d705d06c25293a7b54dbf9df69
 
 function App() {
   const [zipCode, setZipCode] = useState('13040');
