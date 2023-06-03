@@ -17,7 +17,7 @@ function Content({data, setNewLocation, ChangeLocation, isLoading, error, Change
                         <label htmlFor="nextLocation">Search Location</label>
                     </li>
                     <li>
-                        <input type="text" name="nextLocation" id="nextLocation"
+                        <input type="text" name="nextLocation" id="nextLocation" placeholder="Enter Latitude & Longitude"
                             onChange={(e) => {setNewLocation(e.target.value)}}
                         />
                         <button type="submit">Search</button>
