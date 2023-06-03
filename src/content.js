@@ -3,7 +3,7 @@ import Loading from "./loading";
 import Weather from "./weather";
 import Error from "./error";
 
-function Content({data, setNewLocation, ChangeLocation, isLoading, error, ChangeMetric, metric}){
+function Content({data, setNewZipcode, ChangeLocation, isLoading, error, ChangeMetric, metric, setCountrycode, countryCode}){
     return(
         <div id="content">
             <div id="container">
@@ -14,12 +14,13 @@ function Content({data, setNewLocation, ChangeLocation, isLoading, error, Change
             <form onSubmit={(e)=>{ChangeLocation(e)}}>
                 <ul>
                     <li>
-                        <label htmlFor="nextLocation">Search Location</label>
+                        <label htmlFor="zipCode">Zip Code</label>
                     </li>
                     <li>
-                        <input type="text" name="nextLocation" id="nextLocation"
-                            onChange={(e) => {setNewLocation(e.target.value)}}
-                        />
+                        <input type="number" id="zipCode" name="zipCode" min="1" max="99950"
+                        onChange={(e) => {setNewZipcode(e.target.value)}}/>
+                        <input type="text" name='countryCode' id='countryCode' value={countryCode}
+                            onChange={(e) => {setCountrycode(e.target.value)}}/>
                         <button type="submit">Search</button>
                     </li>
                 </ul>

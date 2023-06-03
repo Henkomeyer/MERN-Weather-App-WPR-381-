@@ -9,14 +9,30 @@
   text-align: center;
 }
 
+h5{
+  margin-bottom: -2rem;
+}
+
 h3{
   margin-top: 2rem;
 }
 
+#countryCode{
+  width: 5rem;
+}
+
+#zipcode{
+  width: 10rem;
+}
+
 #content{
   height:70vh;
+  width: 70vw;
   min-height: fit-content;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
 }
 
 #container{
@@ -24,6 +40,8 @@ h3{
   width: 20rem;
   background-color: rgb(23, 205, 229);
   display: flex;
+  justify-content: center;
+  align-items: center;
   border: dotted black;
   border-radius: 3rem;
 }
