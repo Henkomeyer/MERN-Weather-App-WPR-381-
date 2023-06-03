@@ -1,106 +1,79 @@
 import './App.css';
-import { useEffect, useState } from 'react';
-import Header from './header.js'
-import Footer from './footer.js'
-import Content from './content.js'
 import React, { useEffect, useState } from 'react';
+import Header from './header.js';
+import Footer from './footer.js';
+import Content from './content.js';
 
 function App() {
   const [location, setLocation] = useState('50_50');
   const [newLocation, setNewLocation] = useState('');
-  const [data, setData] = useState({})
-  const [metric, setMetric] = useState('C')
-  const [isloading, setIsLoading] = useState(true)
-  const [error, setError] = useState('')
+  const [data, setData] = useState({});
+  const [metric, setMetric] = useState('C°');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  function LoadPage(){
+  function LoadPage() {
     console.log('Loading Page');
     GetData();
   }
 
-  function ChangeMetric(){
-    if(metric === 'C'){
-      setMetric('F')
-    }
-    else{
-      setMetric('C')
-    }
-  }
-
-  async function GetData(){
-    try{
-      setIsLoading(true)
-      let data = await fetch(`/weather-api/${location}`)
-      console.log(data)
-      setData(data)
-      setError('')
-    }catch(error){
-      setError(Error)
-    }finally{
-      setIsLoading(false)
+  function ChangeMetric() {
+    if (metric === 'C°') {
+      setMetric('F°');
+    } else {
+      setMetric('C°');
     }
   }
 
-  function ChangeLocation(e){
+  async function GetData() {
+    try {
+      setIsLoading(true);
+      let response = await fetch(`/weather-api/${location}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather data');
+      }
+      let jsonData = await response.json();
+      console.log(jsonData);
+      setData(jsonData);
+      setError('');
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function ChangeLocation(e) {
     e.preventDefault();
     setLocation(newLocation);
     setNewLocation('');
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     LoadPage();
-  },[location])
+  }, [location]);
 
   return (
     <div className="App">
-      <Header
-      />
+      <Header />
       <Content
-        data = {data}
-        setNewLocation = {setNewLocation}
-        ChangeLocation = {ChangeLocation}
-        isloading = {isloading}
-        error = {error}
-        ChangeMetric = {ChangeMetric}
+        data={data}
+        setNewLocation={setNewLocation}
+        ChangeLocation={ChangeLocation}
+        isLoading={isLoading}
+        error={error}
+        ChangeMetric={ChangeMetric}
         metric={metric}
-        />
-      <Footer/>
+      />
+      <Footer />
     </div>
   );
 }
 
-//Changing background colour based on time
-const App = () => {
-  const [backgroundColor, setBackgroundColor] = useState('');
-
-  useEffect(() => {
-    const updateBackgroundColor = () => {
-      const currentHour = new Date().getHours();
-
-      if (currentHour < 6) {
-        setBackgroundColor('#463f5c');
-      } else if (currentHour < 12) {
-        setBackgroundColor('#789EBF');
-      } else if (currentHour < 15) {
-        setBackgroundColor('#F2B705');
-      } else if (currentHour < 19) {
-        setBackgroundColor('#789EBF');
-      } else {
-        setBackgroundColor('#463f5c');
-      }
-    };
-
-    updateBackgroundColor();
-
-    const interval = setInterval(updateBackgroundColor, 60000); // Update every minute
-
-    return () => {
-      clearInterval(interval); // Cleanup interval on component unmount
-    };
-  }, []);
-
-  return (
-    <div className="app" style={{ backgroundColor }}></div>
-  );
-};
 export default App;
+
+
+
+
+
+
