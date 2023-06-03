@@ -14,14 +14,7 @@ const weatherRoutes = require('./routes/weather-api');
 
 app.use('/weather-api', weatherRoutes);
 
-app.get('/get', (req,res)=>{
-  res.json({
-    location:"location",
-    max:"max temp",
-    min:"min temp",
-    humidity:"humidity"
-  })
-})
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
