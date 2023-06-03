@@ -15,7 +15,13 @@ router.get('/:location', async (req, res) => {
       throw new Error('Failed to fetch weather data');
     }
     const data = await response.json(); 
-    res.json(data);
+    const weatherData = {
+      location: data.name,
+      maxTemp: data.main.temp_max,
+      minTemp: data.main.temp_min,
+      description: data.weather[0].description
+    }
+    res.json(weatherData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to retrieve weather data' });
