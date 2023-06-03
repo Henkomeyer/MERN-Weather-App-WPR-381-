@@ -1,72 +1,107 @@
 import './App.css';
+<<<<<<< HEAD
 import './index.css';
 import { useEffect, useState } from 'react';
 import Header from './header.js'
 import Footer from './footer.js'
 import Content from './content.js'
+=======
+import React, { useEffect, useState } from 'react';
+import Header from './header.js';
+import Footer from './footer.js';
+import Content from './content.js';
+>>>>>>> eaaa214cdf2bd0d705d06c25293a7b54dbf9df69
 
 function App() {
-  const [location, setLocation] = useState('50_50');
+  const [zipCode, setzipCode] = useState('');
+  const [countryCode, setcountryCode] = useState('');
   const [newLocation, setNewLocation] = useState('');
-  const [data, setData] = useState({})
-  const [metric, setMetric] = useState('C')
-  const [isloading, setIsLoading] = useState(true)
-  const [error, setError] = useState('')
+  const [data, setData] = useState({});
+  const [metric, setMetric] = useState('C°');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  function LoadPage(){
+
+  function LoadPage() {
     console.log('Loading Page');
     GetData();
   }
 
-  function ChangeMetric(){
-    if(metric === 'C'){
-      setMetric('F')
-    }
-    else{
-      setMetric('C')
-    }
-  }
-
-  async function GetData(){
-    try{
-      setIsLoading(true)
-      let data = await fetch(`/weather-api/${location}`)
-      console.log(data)
-      setData(data)
-      setError('')
-    }catch(error){
-      setError(Error)
-    }finally{
-      setIsLoading(false)
+  function ChangeMetric() {
+    if (metric === 'C°') {
+      setMetric('F°');
+    } else {
+      setMetric('C°');
     }
   }
 
-  function ChangeLocation(e){
+  async function GetData() {
+    let long; 
+    let lat; 
+    try {
+      setIsLoading(true);
+      let response = await fetch( `https://thezipcodes.com/api/v1/search?zipCode=${zipCode}&countryCode=${countryCode}&apiKey=83e0f9a4a4c8421444538bf95c698f13` );
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather data');
+      }
+      let jsonData = await response.json();
+       long = jsonData.location.longitude;
+       lat = jsonData.location.latitude;
+      console.log(jsonData);
+      setData(jsonData);
+      setError('');
+    } catch (error) {
+      setError(error);
+    } 
+
+    try {
+      let response = await fetch( `/weather-api/:${long}_${lat}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather data');
+      }
+      let jsonData = await response.json();
+      let long = jsonData.location.longitude;
+      let lat = jsonData.location.latitude;
+      console.log(jsonData);
+      setData(jsonData);
+      setError('');
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+   
+  }
+
+  function ChangeLocation(e) {
     e.preventDefault();
-    setLocation(newLocation);
+    setzipCode(zipCode);
     setNewLocation('');
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     LoadPage();
-  },[location])
+  }, [location]);
 
   return (
     <div className="App">
-      <Header
-      />
+      <Header />
       <Content
-        data = {data}
-        setNewLocation = {setNewLocation}
-        ChangeLocation = {ChangeLocation}
-        isloading = {isloading}
-        error = {error}
-        ChangeMetric = {ChangeMetric}
+        data={data}
+        setNewLocation={setNewLocation}
+        ChangeLocation={ChangeLocation}
+        isLoading={isLoading}
+        error={error}
+        ChangeMetric={ChangeMetric}
         metric={metric}
-        />
-      <Footer/>
+      />
+      <Footer />
     </div>
   );
 }
 
 export default App;
+
+
+
+
