@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Header from './header.js'
 import Footer from './footer.js'
 import Content from './content.js'
+import React, { useEffect, useState } from 'react';
 
 function App() {
   const [location, setLocation] = useState('50_50');
@@ -68,4 +69,38 @@ function App() {
   );
 }
 
+//Changing background colour based on time
+const App = () => {
+  const [backgroundColor, setBackgroundColor] = useState('');
+
+  useEffect(() => {
+    const updateBackgroundColor = () => {
+      const currentHour = new Date().getHours();
+
+      if (currentHour < 6) {
+        setBackgroundColor('#463f5c');
+      } else if (currentHour < 12) {
+        setBackgroundColor('#789EBF');
+      } else if (currentHour < 15) {
+        setBackgroundColor('#F2B705');
+      } else if (currentHour < 19) {
+        setBackgroundColor('#789EBF');
+      } else {
+        setBackgroundColor('#463f5c');
+      }
+    };
+
+    updateBackgroundColor();
+
+    const interval = setInterval(updateBackgroundColor, 60000); // Update every minute
+
+    return () => {
+      clearInterval(interval); // Cleanup interval on component unmount
+    };
+  }, []);
+
+  return (
+    <div className="app" style={{ backgroundColor }}></div>
+  );
+};
 export default App;
