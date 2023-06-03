@@ -5,19 +5,39 @@ import Footer from './footer.js'
 import Content from './content.js'
 
 function App() {
-  const [location, setLocation] = useState('Start location');
+  const [location, setLocation] = useState('50_50');
   const [newLocation, setNewLocation] = useState('');
   const [data, setData] = useState({})
+  const [metric, setMetric] = useState('C')
+  const [isloading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
 
   function LoadPage(){
     console.log('Loading Page');
+    GetData();
   }
 
-  function GetData(){
-    fetch("/home")
-    .then(res => res.json())
-    .then(data => setData(data))
-    .then(console.log(data))
+  function ChangeMetric(){
+    if(metric === 'C'){
+      setMetric('F')
+    }
+    else{
+      setMetric('C')
+    }
+  }
+
+  async function GetData(){
+    try{
+      setIsLoading(true)
+      let data = await fetch(`/weather-api/:${location}`)
+      console.log(data)
+      setData(data)
+      setError('')
+    }catch(error){
+      setError(Error)
+    }finally{
+      setIsLoading(false)
+    }
   }
 
   function ChangeLocation(e){
@@ -26,12 +46,9 @@ function App() {
     setNewLocation('');
   }
 
-  
-
   useEffect(()=>{
-    GetData();
     LoadPage();
-  })
+  },[location])
 
   return (
     <div className="App">
@@ -39,9 +56,13 @@ function App() {
       />
       <Content
         data = {data}
-        location = {location}
         setNewLocation = {setNewLocation}
-        ChangeLocation = {ChangeLocation}/>
+        ChangeLocation = {ChangeLocation}
+        isloading = {isloading}
+        error = {error}
+        ChangeMetric = {ChangeMetric}
+        metric={metric}
+        />
       <Footer/>
     </div>
   );

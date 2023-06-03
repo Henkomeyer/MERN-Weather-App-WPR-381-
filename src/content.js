@@ -1,30 +1,29 @@
-const Content= ({data, location, setNewLocation, ChangeLocation})=>{
+import "./index.css";
+import Loading from "./loading";
+import Weather from "./weather";
+import Error from "./error";
+
+function Content({data, setNewLocation, ChangeLocation, isLoading, error, ChangeMetric, metric}){
     return(
-        <div id='content'>
-            <div>
-                {location}
-                <ul>
-                    <li>{data.location}</li>
-                    <li>{data.max}</li>
-                    <li>{data.min}</li>
-                    <li>{data.humidity}</li>
-                </ul>
+        <div id="content">
+            <div id="container">
+                {!isLoading&&!error&&<Weather data = {data} ChangeMetric={ChangeMetric} metric={metric}/>}
+                {!isLoading&&error&&<Error error = {error}/>}
+                {isLoading&&<Loading/>}
             </div>
             <form onSubmit={(e)=>{ChangeLocation(e)}}>
                 <ul>
                     <li>
-                        <label htmlFor="nextLocation">Change Location</label>
+                        <label htmlFor="nextLocation">Search Location</label>
                     </li>
                     <li>
                         <input type="text" name="nextLocation" id="nextLocation"
                             onChange={(e) => {setNewLocation(e.target.value)}}
                         />
-                    </li>
-                    <li>
-                        <button type="submit">Render</button>
+                        <button type="submit">Search</button>
                     </li>
                 </ul>
-            </form>
+            </form>            
         </div>
     )
 }

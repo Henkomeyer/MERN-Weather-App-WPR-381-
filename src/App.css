@@ -1,11 +1,56 @@
+*{
+  margin: 0px;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: column;
+}
+
 .App {
   text-align: center;
 }
 
+h3{
+  margin-top: 2rem;
+}
+
 #content{
-  height: 80vh;
+  height:70vh;
+  min-height: fit-content;
+  display: flex;
+}
+
+#container{
+  height: 20rem;
+  width: 20rem;
+  background-color: rgb(23, 205, 229);
+  display: flex;
+  border: dotted black;
+  border-radius: 3rem;
+}
+
+header{
+  height: 15vh;
+  min-height: 100px;
+  background-color: aqua;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 5rem;
+}
+
+footer{
+  height: 15vh;
+  min-height: 100px;
+  background-color: aqua;
+  padding: 1rem;
+}
+
+ul{
+  list-style: none;
+}
+
+li{
+  margin-left: -2rem;
+}
+
+label{
+  padding: 2rem;
 }
