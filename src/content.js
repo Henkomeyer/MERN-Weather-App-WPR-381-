@@ -1,23 +1,16 @@
 import "./index.css";
+import Loading from "./loading";
+import Weather from "./weather";
+import Error from "./error";
 
-
-function Content({data, location, setNewLocation, ChangeLocation}){
+function Content({data, setNewLocation, ChangeLocation, isLoading, error, ChangeMetric, metric}){
     return(
         <div id="content">
-            <div id="temperature">
-                <h2 id="location">{data.location}</h2>
-                <h3>{data.max}</h3>
-                <h3>{data.min}</h3>
-                <h3>{data.humidity}</h3>
+            <div id="container">
+                {!isLoading&&!error&&<Weather data = {data} ChangeMetric={ChangeMetric} metric={metric}/>}
+                {!isLoading&&error&&<Error error = {error}/>}
+                {isLoading&&<Loading/>}
             </div>
-            <div id="description">
-                <ul>
-                    <li>{data.temperature}</li>
-                    <li>{data.description}</li>
-                </ul>
-            </div>
-            <div id="weather-icon"></div>
-  
             <form onSubmit={(e)=>{ChangeLocation(e)}}>
                 <ul>
                     <li>
@@ -30,15 +23,7 @@ function Content({data, location, setNewLocation, ChangeLocation}){
                         <button type="submit">Search</button>
                     </li>
                 </ul>
-            </form>
-  
-            <div id="unit-toggle">
-                <input type="radio" id="celsius" name="unit" checked onChange={()=>{console.log('change metric')}}/>
-                <label htmlFor="celsius">Celsius</label>
-                <input type="radio" id="fahrenheit" name="unit"/>
-                <label htmlFor="fahrenheit">Fahrenheit</label>
-            </div>
-            
+            </form>            
         </div>
     )
 }
