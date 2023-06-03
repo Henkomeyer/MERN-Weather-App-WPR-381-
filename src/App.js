@@ -29,7 +29,7 @@ function App() {
   async function GetData(){
     try{
       setIsLoading(true)
-      let data = await fetch(`/weather-api/:${location}`)
+      let data = await fetch(`/weather-api/${location}`)
       console.log(data)
       setData(data)
       setError('')
