@@ -1,5 +1,5 @@
 import Footer from './footer.js';
-import './index.css';
+import icon from './index.css';
 
 function Weather({data, ChangeMetric, metric}){
     let description = "sunny"
@@ -20,7 +20,7 @@ function Weather({data, ChangeMetric, metric}){
                         <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                     </div>
                     <div id="icon">
-                        <div id="weather-icon"></div>
+                        <div id="weather-icon" style={icon.sun}></div>
                     </div>
                     <div id="description">
                         <h3>{description}</h3>
@@ -41,7 +41,7 @@ function Weather({data, ChangeMetric, metric}){
                     <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                 </div>
                 <div id="icon">
-                    <div id="weather-icon"></div>
+                    <div id="weather-icon" style={icon.cloud}></div>
                 </div>
                 <div id="description">
                     <h3>{description}</h3>
@@ -61,7 +61,7 @@ function Weather({data, ChangeMetric, metric}){
                     <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                 </div>
                 <div id="icon">
-                    <div id="weather-icon"></div>
+                    <div id="weather-icon" style={icon.snowman}></div>
                 </div>
                 <div id="description">
                     <h3>{description}</h3>
@@ -81,7 +81,7 @@ function Weather({data, ChangeMetric, metric}){
                     <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                 </div>
                 <div id="icon">
-                    <div id="weather-icon"></div>
+                    <div id="weather-icon" style={icon.moon}></div>
                 </div>
                 <div id="description">
                     <h3>{description}</h3>
