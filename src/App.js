@@ -13,13 +13,35 @@ function App() {
   const [metric, setMetric] = useState('C°');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [BackgroundColor, setBackgroundColor] = useState('');
 
-  function LoadPage() {
-    setIsLoading(true)
-    console.log('Loading Page');
-    GetData();
+
+const updateBackgroundColor = () => {
+
+    const currentHour = new Date().getHours();
+
+    if (currentHour < 6) {
+
+      setBackgroundColor('#463f5c');
+
+    } else if (currentHour < 12) {
+
+      setBackgroundColor('#789EBF');
+
+    } else if (currentHour < 15) {
+
+      setBackgroundColor('#F2B705');
+
+    } else if (currentHour < 19) {
+
+      setBackgroundColor('#789EBF');
+
+    } else {
+
+      setBackgroundColor('#463f5c');
+
+    };
   }
-
   function ChangeMetric() {
     if (metric === 'C°') {
       setMetric('F°');
@@ -65,7 +87,14 @@ function App() {
     e.preventDefault();
     setZipCode(newZipCode);
     setNewZipcode('');
-  }
+  };
+
+  function LoadPage() {
+    setIsLoading(true);
+    updateBackgroundColor();
+    console.log('Loading Page');
+    GetData();
+  };
 
   useEffect(() => {
     LoadPage();
@@ -84,6 +113,8 @@ function App() {
         metric={metric}
         setCountrycode = {setCountrycode}
         countryCode={countryCode}
+        BackgroundColor={BackgroundColor}
+        zipCode={zipCode}
       />
       <Footer 
       data={data}
@@ -91,9 +122,34 @@ function App() {
     </div>
   );
 }
+//Changing background colour based on time
+
+//const App1 = () => {
+
+
+ //   const interval = setInterval(updateBackgroundColor, 60000); // Update every minute
+
+
+
+
+   // return () => {
+
+    //  clearInterval(interval); // Cleanup interval on component unmount
+
+   // };
+
+ //}, []);
+
+
+
+
+  // return (
+
+  //   <div className="app" style={{ backgroundColor }}></div>
+
+  // );
+
+//};
 
 export default App;
-
-
-
 
