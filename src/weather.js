@@ -1,5 +1,4 @@
-import Footer from './footer.js';
-import icon from './index.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 function Weather({data, ChangeMetric, metric}){
     let description = "sunny"
@@ -8,7 +7,7 @@ function Weather({data, ChangeMetric, metric}){
     }
         switch(description) 
         {
-            case 'sunny': return(
+            case 'clear sky': return(
                 <div id="weather">
                     <div id="location">
                         <h2 id="location">{data.location}</h2>
@@ -20,7 +19,7 @@ function Weather({data, ChangeMetric, metric}){
                         <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                     </div>
                     <div id="icon">
-                        <div id="weather-icon" style={icon.sun}></div>
+                        <div id="weather-icon" ><FontAwesomeIcon icon="fa-light fa-sun" /></div>
                     </div>
                     <div id="description">
                         <h3>{description}</h3>
@@ -29,7 +28,7 @@ function Weather({data, ChangeMetric, metric}){
                 </div>
             
             );
-            case 'cloudy': return(
+            case 'scattered clouds': return(
                 <div id="weather">
                 <div id="location">
                     <h2 id="location">{data.location}</h2>
@@ -41,7 +40,7 @@ function Weather({data, ChangeMetric, metric}){
                     <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                 </div>
                 <div id="icon">
-                    <div id="weather-icon" style={icon.cloud}></div>
+                    <div id="weather-icon" ><FontAwesomeIcon icon="fa-regular fa-clouds" /></div>
                 </div>
                 <div id="description">
                     <h3>{description}</h3>
@@ -49,7 +48,7 @@ function Weather({data, ChangeMetric, metric}){
                     <button onClick={()=>{ChangeMetric()}}>{metric}</button>
             </div>
             );
-            case 'snowy': return(
+            case 'snow': return(
                 <div id="weather">
                 <div id="location">
                     <h2 id="location">{data.location}</h2>
@@ -61,7 +60,7 @@ function Weather({data, ChangeMetric, metric}){
                     <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                 </div>
                 <div id="icon">
-                    <div id="weather-icon" style={icon.snowman}></div>
+                    <div id="weather-icon" ><FontAwesomeIcon icon="fa-thin fa-snowflake" /></div>
                 </div>
                 <div id="description">
                     <h3>{description}</h3>
@@ -81,7 +80,7 @@ function Weather({data, ChangeMetric, metric}){
                     <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                 </div>
                 <div id="icon">
-                    <div id="weather-icon" style={icon.moon}></div>
+                    <div id="weather-icon" ><FontAwesomeIcon icon="fa-thin fa-moon-stars" /></div>
                 </div>
                 <div id="description">
                     <h3>{description}</h3>
@@ -89,7 +88,7 @@ function Weather({data, ChangeMetric, metric}){
                     <button onClick={()=>{ChangeMetric()}}>{metric}</button>
             </div>
             );
-            case 'stormy': return(
+            case 'rain': return(
                 <div id="weather">
                 <div id="location">
                     <h2 id="location">{data.location}</h2>
@@ -101,7 +100,47 @@ function Weather({data, ChangeMetric, metric}){
                     <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                 </div>
                 <div id="icon">
-                    <div id="weather-icon"></div>
+                    <div id="weather-icon"><FontAwesomeIcon icon="fa-thin fa-cloud-rain" /></div>
+                </div>
+                <div id="description">
+                    <h3>{description}</h3>
+                </div>
+                    <button onClick={()=>{ChangeMetric()}}>{metric}</button>
+            </div>
+            );
+            case 'mist': return(
+                <div id="weather">
+                <div id="location">
+                    <h2 id="location">{data.location}</h2>
+                </div>
+                <div id="maxTemp">
+                    <h3>{(metric === 'C')?Math.round(parseFloat(data.maxTemp)-275, 2):Math.round((parseFloat(data.maxTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
+                </div>
+                <div id = "minTemp">
+                    <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
+                </div>
+                <div id="icon">
+                    <div id="weather-icon"><FontAwesomeIcon icon="fa-thin fa-cloud-fog" /></div>
+                </div>
+                <div id="description">
+                    <h3>{description}</h3>
+                </div>
+                    <button onClick={()=>{ChangeMetric()}}>{metric}</button>
+            </div>
+            );
+            case 'storm': return(
+                <div id="weather">
+                <div id="location">
+                    <h2 id="location">{data.location}</h2>
+                </div>
+                <div id="maxTemp">
+                    <h3>{(metric === 'C')?Math.round(parseFloat(data.maxTemp)-275, 2):Math.round((parseFloat(data.maxTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
+                </div>
+                <div id = "minTemp">
+                    <h3>{(metric === 'C')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
+                </div>
+                <div id="icon">
+                    <div id="weather-icon"><FontAwesomeIcon icon="fa-light fa-cloud-bolt" /></div>
                 </div>
                 <div id="description">
                     <h3>{description}</h3>
@@ -123,7 +162,7 @@ function Weather({data, ChangeMetric, metric}){
                         <h3>{(metric === 'C°')?Math.round(parseFloat(data.minTemp)-275, 2):Math.round((parseFloat(data.minTemp)-275)* 1.8 + 32, 2)}{metric}</h3>
                     </div>
                     <div id="icon">
-                        <div id="weather-icon">ICON</div>
+                        <div id="weather-icon"><FontAwesomeIcon icon="fa-regular fa-cloud-sun" /></div>
                     </div>
                     <div id="description">
                         <h3>{description}</h3>
